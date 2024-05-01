@@ -3,7 +3,7 @@
 api/v1/views/status API endpoints
 """
 
-from flask import jsonify
+from flask import jsonify, make_response
 from api.v1.views import app_views
 
 from models import storage
@@ -21,7 +21,7 @@ def status():
     resp = jsonify(data)
     resp.status_code = 200
 
-    return resp
+    return make_response(resp)
 
 
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
@@ -42,4 +42,4 @@ def stats():
     resp = jsonify(data)
     resp.status_code = 200
 
-    return resp
+    return make_response(resp)

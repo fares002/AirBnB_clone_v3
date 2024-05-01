@@ -3,7 +3,7 @@
 app filestorage
 """
 
-from flask import Flask, jsonify, Blueprint
+from flask import Flask, jsonify, Blueprint, make_response
 from flask_cors import CORS
 from os import getenv
 
@@ -13,7 +13,7 @@ from models import storage
 
 app = Flask(__name__)
 
-CORS(app, resources={r'api/v1/*': {"origins": "0.0.0.0"}})
+cors = CORS(app, resources={r'api/v1/*': {"origins": "0.0.0.0"}})
 
 app.register_blueprint(app_views)
 app.url_map.strict_slashes = False
@@ -34,7 +34,7 @@ def handle_404(exception):
         "error": "Not found"
     }
 
-    resp = jsonify(data)
+    resp = make_response(jsonify(data))
     return resp, 404
 
 
