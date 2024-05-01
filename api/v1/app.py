@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-json
+Start Flask application
 """
 
 from flask import Flask, jsonify, Blueprint, make_response
