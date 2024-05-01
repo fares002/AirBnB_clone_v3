@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-json
+api/v1/views/status API endpoints
 """
 
 from flask import jsonify
@@ -23,20 +23,3 @@ def status():
     return resp
 
 
-@app_views.route("/stats", methods=['GET'], strict_slashes=False)
-def stats():
-    """
-    starts all objects"""
-    data = {
-        "amenities": storage.count("Amenity"),
-        "cities": storage.count("City"),
-        "places": storage.count("Place"),
-        "reviews": storage.count("Review"),
-        "states": storage.count("State"),
-        "users": storage.count("User"),
-    }
-
-    resp = jsonify(data)
-    resp.status_code = 200
-
-    return resp
