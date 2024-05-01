@@ -4,6 +4,7 @@ handle State objects
 """
 from flask import jsonify, abort, request
 from api.v1.views import app_views, storage
+from models import storage
 from models.state import State
 
 
@@ -28,7 +29,7 @@ def delete_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
-    state.delete()
+    storage.delete(state)
     storage.save()
     return jsonify({}), 200
 
