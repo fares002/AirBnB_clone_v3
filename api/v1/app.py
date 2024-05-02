@@ -3,7 +3,7 @@
 Start Flask application
 """
 
-from flask import Flask, jsonify, Blueprint, make_response
+from flask import Flask, jsonify, Blueprint
 from flask_cors import CORS
 from os import getenv
 from api.v1.views import app_views
@@ -31,8 +31,8 @@ def handle_404(exception):
     data = {
         "error": "Not found"
         }
-    resp = make_response(jsonify(data))
-    return resp, 404
+
+    return jsonify(data), 404
 
 
 if __name__ == "__main__":
