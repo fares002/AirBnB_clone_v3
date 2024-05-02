@@ -18,16 +18,13 @@ def status():
         "status": "OK"
     }
 
-    resp = jsonify(data)
-    resp.status_code = 200
-
-    return make_response(resp)
+    return jsonify(data), 200
 
 
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """
-    Return the number of each object 
+    Return the number of each object
     in the database
     """
     data = {
@@ -39,7 +36,4 @@ def stats():
         "users": storage.count("User"),
     }
 
-    resp = jsonify(data)
-    resp.status_code = 200
-
-    return make_response(resp)
+    return jsonify(data), 200
