@@ -12,7 +12,7 @@ def get_amenities():
     """Retrieves the list of all Amenity objects"""
     amenities = storage.all(Amenity).values()
     amenities = [amenity.to_dict() for amenity in amenities]
-    return amenities
+    return jsonify(amenities)
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET'])
@@ -21,7 +21,7 @@ def get_amenity(amenity_id):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
-    return amenity.to_dict()
+    return jsonify(amenity.to_dict()), 200
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'])
@@ -46,7 +46,7 @@ def create_amenity():
     amenity = Amenity(**data)
     storage.new(amenity)
     storage.save()
-    return amenity.to_dict(), 201
+    return jsonify(amenity.to_dict()), 201
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'])
@@ -62,4 +62,4 @@ def update_amenity(amenity_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, key, value)
     storage.save()
-    return amenity.to_dict()
+    return jsonify(amenity.to_dict()), 200
