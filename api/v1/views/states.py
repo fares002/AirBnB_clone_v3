@@ -13,7 +13,7 @@ def get_states():
     """get all states"""
     states = storage.all(State).values()
     states = [state.to_dict() for state in states]
-    return states.to_dict()
+    return states, 200
 
 
 @app_views.route("/states/<state_id>", methods=["GET"], strict_slashes=False)
@@ -22,7 +22,7 @@ def get_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
-    return state.to_dict()
+    return state.to_dict(), 200
 
 
 @app_views.route("/states/<state_id>", methods=["DELETE"])
