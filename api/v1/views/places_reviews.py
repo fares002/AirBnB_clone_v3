@@ -52,6 +52,7 @@ def create_review(place_id):
         abort(400, 'Missing text')
     data['place_id'] = place_id
     review = Review(**data)
+    storage.new(review)
     storage.save()
     return jsonify(review.to_dict()), 201
 
