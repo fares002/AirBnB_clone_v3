@@ -49,6 +49,7 @@ def create_state():
     if 'name' not in data:
         abort(400, 'Missing name')
     state = State(**data)
+    storage.new(state)
     storage.save()
     return state.to_dict(), 201
 
