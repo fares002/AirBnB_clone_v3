@@ -13,7 +13,7 @@ def get_states():
     """get all states"""
     states = storage.all(State).values()
     states = [state.to_dict() for state in states]
-    return states
+    return states.to_dict()
 
 
 @app_views.route("/states/<state_id>", methods=["GET"], strict_slashes=False)
@@ -66,4 +66,4 @@ def update_state(state_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
     storage.save()
-    return state.to_dict()
+    return state.to_dict(), 200
